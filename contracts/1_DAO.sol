@@ -50,6 +50,7 @@ contract Main {
         _;
     }
 
+    // sends fund from investor -> smart contract
     function contribute() public payable {
         require(
             block.timestamp <= contributionTimeEnd,
@@ -63,6 +64,7 @@ contract Main {
         investorsList.push(msg.sender);
     }
 
+    // returns fund from smart contract -> investor
     function redeem(uint256 amount) public onlyInvestor {
         require(numOfShares[msg.sender] >= amount, "Not contributed enough!");
         require(availableFunds >= amount, "Not enough funds left");
@@ -73,6 +75,7 @@ contract Main {
         if (numOfShares[msg.sender] == 0) isInvestor[msg.sender] = false;
     }
 
+    // sends fund from one investor -> another investor
     function transferShares(uint256 amount, address to) public onlyInvestor {
         require(numOfShares[msg.sender] >= amount, "Not contributed enough!");
         numOfShares[msg.sender] -= amount;
@@ -82,6 +85,7 @@ contract Main {
         numOfShares[to] += amount;
     }
 
+    // manager uses this to create proposals
     function createProposal(
         string calldata description,
         uint256 amount,
@@ -100,6 +104,7 @@ contract Main {
         nextProposalId++;
     }
 
+    // investors vote a proposal
     function voteProposal(uint256 proposalId) public onlyInvestor {
         require(isVoted[msg.sender][proposalId] == false, "Already voted!");
         Proposal storage proposal = proposals[proposalId]; //create pointer proposal -> improves readibility
@@ -109,6 +114,7 @@ contract Main {
         proposal.votes += numOfShares[msg.sender];
     }
 
+    // manager executes the proposals which complete whe quorum
     function executeProposal(uint256 proposalId) public onlyManager {
         Proposal storage proposal = proposals[proposalId];
         require(proposal.endAt < block.timestamp, "Voting not over!");
@@ -121,6 +127,7 @@ contract Main {
         totalShares -= proposal.amount;
     }
 
+    // returns the list of all the proposals created
     function proposalList() public view returns (Proposal[] memory) {
         Proposal[] memory prr = new Proposal[](nextProposalId);
         for (uint256 i; i < nextProposalId; i++) {

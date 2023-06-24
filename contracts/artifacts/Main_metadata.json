@@ -361,11 +361,11 @@
 	},
 	"sources": {
 		"contracts/1_DAO.sol": {
-			"keccak256": "0x658ca04e01b942b82b695c1e29d8598d7a636fc4800ee0f17ce36757469df0fa",
+			"keccak256": "0xe947765c3b1dff999077670ca9cbea8293e2ffd7d600edcc9592f7f539f4dc08",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://1c9e06c8439b6b6e2fc842b717e6057a9cb7766101dcbf8f56486321c2a9df76",
-				"dweb:/ipfs/QmVVYxycTfeDEaUDAxD2JL2hm9tk8aAHD9Y3ggUqThtxAg"
+				"bzz-raw://86623c22bcb9241b6d82a266374bc07dd755f514f463cc782e96c991df255f04",
+				"dweb:/ipfs/QmUDnntjzYvzHYr5TU39byPZnb7udNGMTrUiwKfpDuCaCs"
 			]
 		}
 	},
